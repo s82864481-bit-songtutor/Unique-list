@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unique List 👑</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+  
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 50%, #FBC2EB 100%);
+    padding: 20px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 450px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(20px);
+    border-radius: 25px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  h1 {
+    text-align: center;
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  }
+  
+  .subtitle {
+    text-align: center;
+    color: #fff;
+    font-size: 12px;
+    margin-bottom: 25px;
+    opacity: 0.9;
+  }
+
+  .input-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+  }
+
+  .input-box input {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    outline: none;
+    font-size: 14px;
+  }
+  
+  .input-box button {
+    padding: 15px 20px;
+    border: none;
+    border-radius: 15px;
+    background: #FF758C;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .input-box button:hover {
+    background: #FF3D71;
+    transform: scale(1.05);
+  }
+
+  .task {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: 0.3s;
+    animation: pop 0.4s ease;
+  }
+  
+  @keyframes pop {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .task:hover {
+    transform: translateX(5px);
+  }
+
+  .task.completed span {
+    text-decoration: line-through;
+    color: #aaa;
+  }
+
+  .task span {
+    flex: 1;
+    color: #333;
+    font-weight: 500;
+  }
+
+  .task button {
+    border: none;
+    background: #FF9A9E;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 8px;
+    font-size: 12px;
+  }
+  
+  .task button.delete {
+    background: #ff4d6d;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Queen Sania's To-Do 👑</h1>
+  <p class="subtitle">"Girte hain, Seekhte hain, Lead karte hain"</p>
+  
+  <div class="input-box">
+    <input type="text" id="taskInput" placeholder="Add your dream task... ✨">
+    <button onclick="addTask()">Add</button>
+  </div>
+  
+  <div id="taskList"></div>
+</div>
+
+<script>
+  function addTask() {
+    let input = document.getElementById("taskInput");
+    let taskText = input.value.trim();
+    if(taskText === "") return;
+
+    let taskList = document.getElementById("taskList");
+    
+    let taskDiv = document.createElement("div");
+    taskDiv.classList.add("task");
+    
+    taskDiv.innerHTML = `
+      <span onclick="toggleComplete(this)">${taskText}</span>
+      <button class="delete" onclick="deleteTask(this)">X</button>
+    `;
+    
+    taskList.appendChild(taskDiv);
+    input.value = "";
+  }
+  
+  function toggleComplete(el) {
+    el.parentElement.classList.toggle("completed");
+  }
+  
+  function deleteTask(el) {
+    el.parentElement.remove();
+  }
+  
+  // Enter dabane se bhi add ho jaye
+  document.getElementById("taskInput").addEventListener("keypress", function(e){
+    if(e.key === "Enter") addTask();
+  });
+</script>
+
+</body>
+</html>
